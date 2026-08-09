@@ -15,13 +15,13 @@
      ============================================ */
 
   :root{
-    --bg: #1B1210;
-    --surface: #2B1C19;
-    --primary: #C65A4C;
-    --on-surface: #F4E9DE;
-    --on-surface-dim: #A98E80;
-    --accent: #EFA79C;
-    --outline: #3E2A25;
+    --bg: #150C0C;
+    --surface: #251512;
+    --primary: #B3221F;
+    --on-surface: #F1E7DE;
+    --on-surface-dim: #A98878;
+    --accent: #E85C4A;
+    --outline: #3B211D;
   }
 
   *{ box-sizing: border-box; margin:0; padding:0; }
@@ -77,22 +77,10 @@
     font-size: 0.95rem;
   }
 
-  .status{
-    display:inline-flex; align-items:center; gap:7px;
-    margin-top: 14px;
-    font-size: 0.78rem; font-weight:600;
-    color: var(--on-surface-dim);
-    text-transform: uppercase; letter-spacing: 0.06em;
-  }
-  .status-dot{
-    width:7px; height:7px; border-radius:50%;
-    background: var(--accent);
-    box-shadow: 0 0 0 3px rgba(216,255,61,0.35);
-  }
-
   .icons{
     display:flex; justify-content:center; gap: 14px;
     margin-top: 30px;
+    flex-wrap: wrap;
   }
   .icons a{
     width: 46px; height: 46px;
@@ -176,7 +164,14 @@
     <a href="https://www.youtube.com/@StarS-ls5rx" target="_blank" rel="noopener" aria-label="YouTube">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.6-.5-5.3c-.3-1-1-1.7-2-2C18.9 4.2 12 4.2 12 4.2s-6.9 0-8.5.5c-1 .3-1.7 1-2 2C1 8.4 1 12 1 12s0 3.6.5 5.3c.3 1 1 1.7 2 2 1.6.5 8.5.5 8.5.5s6.9 0 8.5-.5c1-.3 1.7-1 2-2 .5-1.7.5-5.3.5-5.3ZM9.8 15.5V8.5l6.3 3.5-6.3 3.5Z"/></svg>
     </a>
-  
+    <!-- EDIT: point this at your real osu! profile -->
+    <a href="https://osu.ppy.sh/users/yourprofile" target="_blank" rel="noopener" aria-label="osu!">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"></circle></svg>
+    </a>
+    <!-- EDIT: point this at your real donation page (Ko-fi, PayPal, etc.) -->
+    <a href="https://ko-fi.com/yourpage" target="_blank" rel="noopener" aria-label="Donate">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-10-9.2C.6 8.7 2 5 5.5 5c2 0 3.4 1.1 4.1 2.3.3.5 1.5.5 1.8 0C12.1 6.1 13.5 5 15.5 5 19 5 20.4 8.7 19 12.8 16.5 16.4 12 21 12 21Z"/></svg>
+    </a>
   </div>
 
   <div class="specs">
@@ -201,8 +196,8 @@
   var w, h, particles;
   var mouse = { x: null, y: null, active: false };
 
-  var LINE_COLOR = '169, 142, 128';   // matches --on-surface-dim
-  var MOUSE_LINE_COLOR = '198, 90, 76'; // matches --primary
+  var LINE_COLOR = '169, 136, 120';   // matches --on-surface-dim
+  var MOUSE_LINE_COLOR = '232, 92, 74'; // matches --accent
   var MAX_DIST = 130;
   var MOUSE_DIST = 240;
 
