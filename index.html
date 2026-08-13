@@ -165,6 +165,12 @@
     height: 20px;
     vertical-align: middle;
   }
+  
+  .sound-toggle:hover{ background: var(--primary); color: #fff; }
+  .sound-toggle svg{ width:18px; height:18px; }
+  .sound-toggle .icon-off{ display: none; }
+  .sound-toggle.playing .icon-on{ display: none; }
+  .sound-toggle.playing .icon-off{ display: block;}
 
   :focus-visible{ outline: 2px solid var(--primary); outline-offset: 3px; }
 
