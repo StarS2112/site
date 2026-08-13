@@ -15,7 +15,502 @@
     --primary: #B3221F;
     --on-surface: #F1E7DE;
     --on-surface-dim: #A98878;
+    --accent: #E85C4A;<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>stars21 pearto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/maple-mono@5.3.0/500.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/maple-mono@5.3.0/600.css" rel="stylesheet">
+<style>
+  :root{
+    --bg: #150C0C;
+    --surface: #251512;
+    --primary: #B3221F;
+    --on-surface: #F1E7DE;
+    --on-surface-dim: #A98878;
     --accent: #E85C4A;
+    --outline: #3B211D;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+
+  body{
+    background: var(--bg);
+    color: var(--on-surface);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  #net{
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    display: block;
+  }
+
+  .card{
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .avatar{
+    width: 167px; height: 167px;
+    margin: 0 auto 22px;
+    background: linear-gradient(135deg, var(--primary), var(--accent) 140%);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size: 1.6rem; color:#fff;
+    object-fit: cover;
+    clip-path: polygon(98.00% 50.00%, 97.87% 51.25%, 97.50% 52.49%, 96.90% 53.69%, 96.09% 54.84%, 95.11% 55.94%, 94.00% 56.97%, 92.79% 57.93%, 91.55% 58.83%, 90.31% 59.68%, 89.12% 60.48%, 88.02% 61.26%, 87.05% 62.04%, 86.23% 62.83%, 85.58% 63.66%, 85.11% 64.54%, 84.81% 65.50%, 84.69% 66.55%, 84.71% 67.69%, 84.85% 68.92%, 85.07% 70.25%, 85.35% 71.66%, 85.62% 73.13%, 85.87% 74.65%, 86.04% 76.18%, 86.10% 77.70%, 86.02% 79.17%, 85.77% 80.55%, 85.35% 81.83%, 84.74% 82.97%, 83.94% 83.94%, 82.97% 84.74%, 81.83% 85.35%, 80.55% 85.77%, 79.17% 86.02%, 77.70% 86.10%, 76.18% 86.04%, 74.65% 85.87%, 73.13% 85.62%, 71.66% 85.35%, 70.25% 85.07%, 68.92% 84.85%, 67.69% 84.71%, 66.55% 84.69%, 65.50% 84.81%, 64.54% 85.11%, 63.66% 85.58%, 62.83% 86.23%, 62.04% 87.05%, 61.26% 88.02%, 60.48% 89.12%, 59.68% 90.31%, 58.83% 91.55%, 57.93% 92.79%, 56.97% 94.00%, 55.94% 95.11%, 54.84% 96.09%, 53.69% 96.90%, 52.49% 97.50%, 51.25% 97.87%, 50.00% 98.00%, 48.75% 97.87%, 47.51% 97.50%, 46.31% 96.90%, 45.16% 96.09%, 44.06% 95.11%, 43.03% 94.00%, 42.07% 92.79%, 41.17% 91.55%, 40.32% 90.31%, 39.52% 89.12%, 38.74% 88.02%, 37.96% 87.05%, 37.17% 86.23%, 36.34% 85.58%, 35.46% 85.11%, 34.50% 84.81%, 33.45% 84.69%, 32.31% 84.71%, 31.08% 84.85%, 29.75% 85.07%, 28.34% 85.35%, 26.87% 85.62%, 25.35% 85.87%, 23.82% 86.04%, 22.30% 86.10%, 20.83% 86.02%, 19.45% 85.77%, 18.17% 85.35%, 17.03% 84.74%, 16.06% 83.94%, 15.26% 82.97%, 14.65% 81.83%, 14.23% 80.55%, 13.98% 79.17%, 13.90% 77.70%, 13.96% 76.18%, 14.13% 74.65%, 14.38% 73.13%, 14.65% 71.66%, 14.93% 70.25%, 15.15% 68.92%, 15.29% 67.69%, 15.31% 66.55%, 15.19% 65.50%, 14.89% 64.54%, 14.42% 63.66%, 13.77% 62.83%, 12.95% 62.04%, 11.98% 61.26%, 10.88% 60.48%, 9.69% 59.68%, 8.45% 58.83%, 7.21% 57.93%, 6.00% 56.97%, 4.89% 55.94%, 3.91% 54.84%, 3.10% 53.69%, 2.50% 52.49%, 2.13% 51.25%, 2.00% 50.00%, 2.13% 48.75%, 2.50% 47.51%, 3.10% 46.31%, 3.91% 45.16%, 4.89% 44.06%, 6.00% 43.03%, 7.21% 42.07%, 8.45% 41.17%, 9.69% 40.32%, 10.88% 39.52%, 11.98% 38.74%, 12.95% 37.96%, 13.77% 37.17%, 14.42% 36.34%, 14.89% 35.46%, 15.19% 34.50%, 15.31% 33.45%, 15.29% 32.31%, 15.15% 31.08%, 14.93% 29.75%, 14.65% 28.34%, 14.38% 26.87%, 14.13% 25.35%, 13.96% 23.82%, 13.90% 22.30%, 13.98% 20.83%, 14.23% 19.45%, 14.65% 18.17%, 15.26% 17.03%, 16.06% 16.06%, 17.03% 15.26%, 18.17% 14.65%, 19.45% 14.23%, 20.83% 13.98%, 22.30% 13.90%, 23.82% 13.96%, 25.35% 14.13%, 26.87% 14.38%, 28.34% 14.65%, 29.75% 14.93%, 31.08% 15.15%, 32.31% 15.29%, 33.45% 15.31%, 34.50% 15.19%, 35.46% 14.89%, 36.34% 14.42%, 37.17% 13.77%, 37.96% 12.95%, 38.74% 11.98%, 39.52% 10.88%, 40.32% 9.69%, 41.17% 8.45%, 42.07% 7.21%, 43.03% 6.00%, 44.06% 4.89%, 45.16% 3.91%, 46.31% 3.10%, 47.51% 2.50%, 48.75% 2.13%, 50.00% 2.00%, 51.25% 2.13%, 52.49% 2.50%, 53.69% 3.10%, 54.84% 3.91%, 55.94% 4.89%, 56.97% 6.00%, 57.93% 7.21%, 58.83% 8.45%, 59.68% 9.69%, 60.48% 10.88%, 61.26% 11.98%, 62.04% 12.95%, 62.83% 13.77%, 63.66% 14.42%, 64.54% 14.89%, 65.50% 15.19%, 66.55% 15.31%, 67.69% 15.29%, 68.92% 15.15%, 70.25% 14.93%, 71.66% 14.65%, 73.13% 14.38%, 74.65% 14.13%, 76.18% 13.96%, 77.70% 13.90%, 79.17% 13.98%, 80.55% 14.23%, 81.83% 14.65%, 82.97% 15.26%, 83.94% 16.06%, 84.74% 17.03%, 85.35% 18.17%, 85.77% 19.45%, 86.02% 20.83%, 86.10% 22.30%, 86.04% 23.82%, 85.87% 25.35%, 85.62% 26.87%, 85.35% 28.34%, 85.07% 29.75%, 84.85% 31.08%, 84.71% 32.31%, 84.69% 33.45%, 84.81% 34.50%, 85.11% 35.46%, 85.58% 36.34%, 86.23% 37.17%, 87.05% 37.96%, 88.02% 38.74%, 89.12% 39.52%, 90.31% 40.32%, 91.55% 41.17%, 92.79% 42.07%, 94.00% 43.03%, 95.11% 44.06%, 96.09% 45.16%, 96.90% 46.31%, 97.50% 47.51%, 97.87% 48.75%);
+  }
+
+  h1{
+    font-family:'Space Grotesk', sans-serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+  }
+
+  .tagline{
+    margin-top: 6px;
+    color: var(--on-surface-dim);
+    font-size: 0.95rem;
+  }
+
+  .icons{
+    display:flex; justify-content:center; gap: 14px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+  }
+  .icons a{
+    position: relative;
+    width: 46px; height: 46px;
+    display:flex; align-items:center; justify-content:center;
+    background: var(--surface);
+    border: 1px solid var(--outline);
+    border-radius: 50%;
+    color: var(--on-surface);
+    transition: background .2s ease, color .2s ease, transform .2s ease;
+  }
+  .icons a svg{ width:19px; height:19px; }
+  .icons a:hover{
+    background: var(--primary);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+
+  .icons a::after{
+    content: attr(aria-label);
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    background: var(--surface);
+    color: var(--on-surface);
+    border: 1px solid var(--outline);
+    padding: 5px 11px;
+    border-radius: 8px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .15s ease, transform .15s ease;
+    z-index: 5;
+  }
+  .icons a:hover::after{
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .specs{
+    margin-top: 44px;
+    text-align: left;
+    background: var(--surface);
+    border: 1px solid var(--outline);
+    border-radius: 20px 20px 20px 6px;
+    padding: 22px 24px;
+    font-family: 'Maple Mono', monospace;
+    font-size: 0.82rem;
+    line-height: 1.9;
+  }
+  .specs .head{
+    display:flex; justify-content:space-between; align-items:center;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--outline);
+  }
+  .specs .head span:first-child{
+    font-weight:600; color: var(--on-surface);
+    text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.75rem;
+  }
+  .specs .head span:last-child{ color: var(--on-surface-dim); font-size: 0.75rem; }
+
+  .row{ display:flex; justify-content:space-between; gap: 12px; }
+  .row .k{ color: var(--on-surface-dim); }
+  .row .v{ color: var(--on-surface); font-weight: 600; text-align: right; }
+  .spec-link{
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--accent);
+  }
+  .spec-link:hover{ border-bottom-style: solid; }
+
+  footer{
+    margin-top: 40px;
+    font-size: 0.78rem;
+    color: var(--on-surface-dim);
+    font-family: 'Maple Mono', monospace;
+  }
+
+  .visits{
+    display: block;
+    margin-top: 24px;
+  }
+  .visits img{
+    height: 20px;
+    vertical-align: middle;
+  }
+
+  .sound-toggle{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 3;
+    width: 42px; height: 42px;
+    display:flex; align-items:center; justify-content:center;
+    background: var(--surface);
+    border: 1px solid var(--outline);
+    border-radius: 50%;
+    color: var(--on-surface);
+    cursor: pointer;
+    transition: background .2s ease, color .2s ease;
+  }
+  .sound-toggle:hover{ background: var(--primary); color: #fff; }
+  .sound-toggle svg{ width:18px; height:18px; }
+  .sound-toggle .icon-off{ display: none; }
+  .sound-toggle.playing .icon-on{ display: none; }
+  .sound-toggle.playing .icon-off{ display: block; }
+
+  #viz{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    z-index: 2;
+    pointer-events: none;
+    display: block;
+    filter: blur(1.5px);
+  }
+
+  :focus-visible{ outline: 2px solid var(--primary); outline-offset: 3px; }
+
+  @media (max-width: 420px){
+    .row{ flex-direction: column; gap: 2px; }
+    .row .v{ text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="net" aria-hidden="true"></canvas>
+
+<audio id="bgm" src="theme.mp3" loop preload="auto"></audio>
+<canvas id="viz" aria-hidden="true"></canvas>
+<button class="sound-toggle" id="soundToggle" aria-label="Toggle sound" type="button">
+  <svg class="icon-on" viewBox="0 0 24 24" fill="currentColor"><path d="M3 10v4h4l5 5V5L7 10H3Zm13.5 2a4.5 4.5 0 0 0-2.5-4.03v8.06A4.5 4.5 0 0 0 16.5 12ZM14 3.23v2.06c3.39.9 5.5 3.9 5.5 6.71s-2.11 5.81-5.5 6.71v2.06c4.5-.93 7.5-4.7 7.5-8.77s-3-7.84-7.5-8.77Z"/></svg>
+  <svg class="icon-off" viewBox="0 0 24 24" fill="currentColor"><path d="M3 10v4h4l5 5V5L7 10H3Zm13.06-1.94-1.41 1.41L16.17 12l-1.52 1.53 1.41 1.41L17.59 13l1.53 1.53 1.41-1.41L19 11.59l1.53-1.53-1.41-1.41L17.59 10.17 16.06 8.66Z"/></svg>
+</button>
+
+<div class="card">
+  <img class="avatar" src="avatar.jpeg">
+
+  <h1>stars21</h1>
+  <p class="tagline">恋をして　ふられ　また　捨てられて</p>
+
+  <div class="icons">
+    <a href="https://github.com/StarS2112" target="_blank" rel="noopener" aria-label="GitHub">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.02-.01-1.86-2.78.62-3.37-1.22-3.37-1.22-.46-1.19-1.11-1.51-1.11-1.51-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.95.68 1.92 0 1.39-.01 2.51-.01 2.85 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg>
+    </a>
+    <a href="https://www.tiktok.com/@stars2112" target="_blank" rel="noopener" aria-label="TikTok">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82a4.28 4.28 0 0 1-3.36-1.5V4h-2.62v13.1a2.7 2.7 0 1 1-2.19-2.66V11.9a5.3 5.3 0 1 0 4.81 5.28V9.4a6.9 6.9 0 0 0 4.36 1.56V8.36c-.34 0-.68-.03-1-.09Z"/></svg>
+    </a>
+    <a href="https://x.com/notstars21" target="_blank" rel="noopener" aria-label="X">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-7l-5.5-7.2L4.5 22H1.4l8.1-9.3L1 2h7.2l5 6.6L18.9 2Zm-1.2 18h1.7L6.4 4H4.6l13.1 16Z"/></svg>
+    </a>
+    <a href="https://discord.gg/YgbVKJcBBs" target="_blank" rel="noopener" aria-label="Discord">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.3 5.4A17.5 17.5 0 0 0 15.9 4c-.2.4-.5.9-.6 1.3a16.5 16.5 0 0 0-4.8 0A9 9 0 0 0 9.8 4a17.6 17.6 0 0 0-4.4 1.4C2.6 9 1.9 12.5 2.2 16a17.7 17.7 0 0 0 5.3 2.7c.4-.6.8-1.2 1.1-1.9-.6-.2-1.2-.5-1.7-.9l.4-.3c3.3 1.5 6.9 1.5 10.2 0l.4.3c-.5.4-1.1.7-1.7.9.3.7.7 1.3 1.1 1.9a17.6 17.6 0 0 0 5.3-2.7c.4-4-.6-7.5-2.3-10.6ZM9.7 13.9c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Zm4.7 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Z"/></svg>
+    </a>
+    <a href="https://www.youtube.com/@StarS-ls5rx" target="_blank" rel="noopener" aria-label="YouTube">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.6-.5-5.3c-.3-1-1-1.7-2-2C18.9 4.2 12 4.2 12 4.2s-6.9 0-8.5.5c-1 .3-1.7 1-2 2C1 8.4 1 12 1 12s0 3.6.5 5.3c.3 1 1 1.7 2 2 1.6.5 8.5.5 8.5.5s6.9 0 8.5-.5c1-.3 1.7-1 2-2 .5-1.7.5-5.3.5-5.3ZM9.8 15.5V8.5l6.3 3.5-6.3 3.5Z"/></svg>
+    </a>
+    <a href="https://osu.ppy.sh/users/12803891" target="_blank" rel="noopener" aria-label="osu!">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"></circle></svg>
+    </a>
+    <a href="https://sociabuzz.com/stars_2112/donate" target="_blank" rel="noopener" aria-label="Donate">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-10-9.2C.6 8.7 2 5 5.5 5c2 0 3.4 1.1 4.1 2.3.3.5 1.5.5 1.8 0C12.1 6.1 13.5 5 15.5 5 19 5 20.4 8.7 19 12.8 16.5 16.4 12 21 12 21Z"/></svg>
+    </a>
+  </div>
+
+  <div class="specs">
+    <div class="head"><span>Rig</span><span>Pearto Rig</span></div>
+    <div class="row"><span class="k">motherboard</span><span class="v">A320M-S2H</span></div>
+    <div class="row"><span class="k">cpu</span><span class="v">AMD Ryzen 5 5600</span></div>
+    <div class="row"><span class="k">gpu</span><span class="v">AMD Radeon RX 550</span></div>
+    <div class="row"><span class="k">ram</span><span class="v">32GB Corsair Vengance DDR4</span></div>
+    <div class="row"><span class="k">display</span><span class="v">Samsung LF27T35</span></div>
+    <div class="row"><span class="k">os</span><span class="v">Cachy OS</span></div>
+    <div class="row"><span class="k">shell</span><span class="v"><a href="https://github.com/pctrade/end4-pC" target="_blank" rel="noopener" class="spec-link">Hyprland (end4-pC)</a></span></div>
+  </div>
+
+  <a class="visits" href="https://hits.sh/stars2112.github.io/"><img alt="Hits" src="https://hits.sh/stars2112.github.io.svg?color=ffb4a9"/></a>
+
+</div>
+
+<script>
+(function(){
+  var canvas = document.getElementById('net');
+  var ctx = canvas.getContext('2d');
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var w, h, particles;
+  var mouse = { x: null, y: null, active: false };
+
+  var LINE_COLOR = '169, 136, 120';
+  var MOUSE_LINE_COLOR = '232, 92, 74';
+  var MAX_DIST = 130;
+  var MOUSE_DIST = 240;
+
+  function size(){
+    w = window.innerWidth;
+    h = window.innerHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function makeParticles(){
+    var count = Math.round((w * h) / 16000);
+    count = Math.max(40, Math.min(count, 110));
+    particles = [];
+    for (var i = 0; i < count; i++){
+      particles.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        r: Math.random() * 1.4 + 0.8
+      });
+    }
+  }
+
+  function step(){
+    ctx.clearRect(0, 0, w, h);
+
+    for (var i = 0; i < particles.length; i++){
+      var p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0 || p.x > w) p.vx *= -1;
+      if (p.y < 0 || p.y > h) p.vy *= -1;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(' + LINE_COLOR + ', 0.55)';
+      ctx.fill();
+
+      for (var j = i + 1; j < particles.length; j++){
+        var q = particles[j];
+        var dx = p.x - q.x, dy = p.y - q.y;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < MAX_DIST){
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
+          ctx.strokeStyle = 'rgba(' + LINE_COLOR + ', ' + (1 - dist / MAX_DIST) * 0.35 + ')';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+
+      if (mouse.active){
+        var mdx = p.x - mouse.x, mdy = p.y - mouse.y;
+        var mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+        if (mdist < MOUSE_DIST){
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.strokeStyle = 'rgba(' + MOUSE_LINE_COLOR + ', ' + (1 - mdist / MOUSE_DIST) * 0.9 + ')';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+        }
+      }
+    }
+
+    if (mouse.active){
+      ctx.beginPath();
+      ctx.arc(mouse.x, mouse.y, 4.5, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(' + MOUSE_LINE_COLOR + ', 1)';
+      ctx.fill();
+    }
+
+    if (!reduceMotion) requestAnimationFrame(step);
+  }
+
+  window.addEventListener('resize', function(){
+    size();
+    makeParticles();
+    if (reduceMotion) step();
+  });
+
+  window.addEventListener('mousemove', function(e){
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+    mouse.active = true;
+  });
+  window.addEventListener('mouseleave', function(){
+    mouse.active = false;
+  });
+  window.addEventListener('touchmove', function(e){
+    if (e.touches && e.touches[0]){
+      mouse.x = e.touches[0].clientX;
+      mouse.y = e.touches[0].clientY;
+      mouse.active = true;
+    }
+  }, { passive: true });
+  window.addEventListener('touchend', function(){
+    mouse.active = false;
+  });
+
+  size();
+  makeParticles();
+  step();
+
+  var bgm = document.getElementById('bgm');
+  var toggle = document.getElementById('soundToggle');
+  var FIXED_VOLUME = 0.85; // 0.0–1.0 — change this one number to adjust
+
+  // --- visualizer setup (Web Audio API) ---
+  var vizCanvas = document.getElementById('viz');
+  var vizCtx = vizCanvas.getContext('2d');
+  var audioCtx, analyser, freqData, vizReady = false;
+
+  function sizeViz(){
+    vizCanvas.width = window.innerWidth * dpr;
+    vizCanvas.height = 70 * dpr;
+    vizCanvas.style.width = window.innerWidth + 'px';
+    vizCanvas.style.height = '70px';
+    vizCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  sizeViz();
+  window.addEventListener('resize', sizeViz);
+
+  function setupVisualizer(){
+    if (vizReady) return;
+    vizReady = true;
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    var source = audioCtx.createMediaElementSource(bgm);
+    analyser = audioCtx.createAnalyser();
+    analyser.fftSize = 512;
+    analyser.smoothingTimeConstant = 0.6;
+    freqData = new Uint8Array(analyser.frequencyBinCount);
+    source.connect(analyser);
+    analyser.connect(audioCtx.destination);
+    drawViz();
+  }
+
+  function drawViz(){
+    requestAnimationFrame(drawViz);
+    if (!analyser) return;
+    analyser.getByteFrequencyData(freqData);
+
+    var vw = window.innerWidth;
+    var h = 70;
+    vizCtx.clearRect(0, 0, vw, h);
+
+    var n = freqData.length;
+    var smoothWindow = 2;
+    var smoothed = new Array(n);
+    for (var i = 0; i < n; i++){
+      var sum = 0, count = 0;
+      for (var j = -smoothWindow; j <= smoothWindow; j++){
+        var idx = Math.max(0, Math.min(n - 1, i + j));
+        sum += freqData[idx];
+        count++;
+      }
+      smoothed[i] = sum / count;
+    }
+
+    var SENSITIVITY = 2.15; // 1.0 = raw signal, higher = more reactive to quiet audio
+    vizCtx.beginPath();
+    vizCtx.moveTo(0, h);
+    for (var i = 0; i < n; i++){
+      var x = i * vw / (n - 1);
+      var value = Math.min(1, (smoothed[i] / 255) * SENSITIVITY);
+      var y = h - value * h;
+      vizCtx.lineTo(x, y);
+    }
+    vizCtx.lineTo(vw, h);
+    vizCtx.closePath();
+    vizCtx.fillStyle = 'rgba(232, 92, 74, 0.22)';
+    vizCtx.fill();
+  }
+  // --- end visualizer setup ---
+
+  bgm.volume = FIXED_VOLUME;
+  bgm.muted = true;
+  bgm.play().catch(function(){ /* ignored — will start on first interaction below */ });
+
+  function unmuteOnFirstInteraction(){
+    setupVisualizer();
+    bgm.muted = false;
+    if (bgm.paused) bgm.play();
+    toggle.classList.add('playing');
+    window.removeEventListener('pointerdown', unmuteOnFirstInteraction);
+    window.removeEventListener('pointermove', unmuteOnFirstInteraction);
+    window.removeEventListener('touchstart', unmuteOnFirstInteraction);
+    window.removeEventListener('keydown', unmuteOnFirstInteraction);
+    window.removeEventListener('scroll', unmuteOnFirstInteraction);
+  }
+  window.addEventListener('pointerdown', unmuteOnFirstInteraction, { once: true });
+  window.addEventListener('pointermove', unmuteOnFirstInteraction, { once: true });
+  window.addEventListener('touchstart', unmuteOnFirstInteraction, { once: true, passive: true });
+  window.addEventListener('keydown', unmuteOnFirstInteraction, { once: true });
+  window.addEventListener('scroll', unmuteOnFirstInteraction, { once: true, passive: true });
+
+  toggle.addEventListener('click', function(e){
+    e.stopPropagation();
+    setupVisualizer();
+    if (bgm.paused || bgm.muted){
+      bgm.muted = false;
+      bgm.play();
+      toggle.classList.add('playing');
+    } else {
+      bgm.pause();
+      toggle.classList.remove('playing');
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
     --outline: #3B211D;
   }
 
