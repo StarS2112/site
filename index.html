@@ -199,6 +199,56 @@
     filter: blur(1.5px);
   }
 
+  #loader{
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding: 20px;
+    transition: opacity .5s ease, visibility .5s ease;
+  }
+  #loader.hidden{
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .loader-avatar{
+    width: 96px; height: 96px;
+    margin-bottom: 4px;
+  }
+  .loader-name{
+    font-family: 'Google Sans Flex', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--on-surface);
+  }
+  .loader-quote{
+    color: var(--on-surface-dim);
+    font-size: 0.85rem;
+    text-align: center;
+  }
+  .loader-bar{
+    width: 200px;
+    height: 6px;
+    background: var(--surface);
+    border: 1px solid var(--outline);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-top: 10px;
+  }
+  .loader-bar-fill{
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    border-radius: 999px;
+    transition: width .3s ease;
+  }
+
   :focus-visible{ outline: 2px solid var(--primary); outline-offset: 3px; }
 
   @media (max-width: 420px){
@@ -208,6 +258,13 @@
 </style>
 </head>
 <body>
+
+<div id="loader">
+  <img class="avatar loader-avatar" src="avatar.jpeg" alt="">
+  <div class="loader-name">stars21</div>
+  <div class="loader-quote">恋をして　ふられ　また　捨てられて</div>
+  <div class="loader-bar"><div class="loader-bar-fill" id="loaderFill"></div></div>
+</div>
 
 <canvas id="net" aria-hidden="true"></canvas>
 
@@ -380,6 +437,54 @@
   window.addEventListener('touchend', function(){
     mouse.active = false;
   });
+
+  // --- loading screen ---
+  var loader = document.getElementById('loader');
+  var loaderFill = document.getElementById('loaderFill');
+  var loadTasks = { image: false, audio: false, fonts: false };
+
+  function updateLoadProgress(){
+    var done = 0;
+    for (var key in loadTasks) if (loadTasks[key]) done++;
+    var pct = (done / 3) * 100;
+    loaderFill.style.width = pct + '%';
+    if (done >= 3) hideLoader();
+  }
+
+  function hideLoader(){
+    setTimeout(function(){
+      loader.classList.add('hidden');
+    }, 250);
+  }
+
+  var loaderAvatarImg = document.querySelector('.loader-avatar');
+  if (loaderAvatarImg.complete){
+    loadTasks.image = true;
+  } else {
+    loaderAvatarImg.addEventListener('load', function(){ loadTasks.image = true; updateLoadProgress(); });
+    loaderAvatarImg.addEventListener('error', function(){ loadTasks.image = true; updateLoadProgress(); });
+  }
+
+  var loaderAudio = document.getElementById('bgm');
+  loaderAudio.addEventListener('canplaythrough', function(){ loadTasks.audio = true; updateLoadProgress(); }, { once: true });
+  loaderAudio.addEventListener('error', function(){ loadTasks.audio = true; updateLoadProgress(); }, { once: true });
+
+  if (document.fonts && document.fonts.ready){
+    document.fonts.ready.then(function(){ loadTasks.fonts = true; updateLoadProgress(); });
+  } else {
+    loadTasks.fonts = true;
+  }
+
+  // safety net: never let the loader hang forever if something fails to fire
+  setTimeout(function(){
+    loadTasks.image = true;
+    loadTasks.audio = true;
+    loadTasks.fonts = true;
+    updateLoadProgress();
+  }, 6000);
+
+  updateLoadProgress();
+  // --- end loading screen ---
 
   size();
   makeParticles();
