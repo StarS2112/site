@@ -192,7 +192,6 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 70px;
     z-index: 2;
     pointer-events: none;
     display: block;
@@ -387,18 +386,20 @@
 
   var bgm = document.getElementById('bgm');
   var toggle = document.getElementById('soundToggle');
-  var FIXED_VOLUME = 0.35; // 0.0–1.0 — change this one number to adjust
+  var FIXED_VOLUME = 0.85; // 0.0–1.0 — change this one number to adjust
 
   // --- visualizer setup (Web Audio API) ---
   var vizCanvas = document.getElementById('viz');
   var vizCtx = vizCanvas.getContext('2d');
   var audioCtx, analyser, freqData, vizReady = false;
+  var vizHeight = 70;
 
   function sizeViz(){
+    vizHeight = Math.round(window.innerHeight * 0.32); // scales with the window
     vizCanvas.width = window.innerWidth * dpr;
-    vizCanvas.height = 70 * dpr;
+    vizCanvas.height = vizHeight * dpr;
     vizCanvas.style.width = window.innerWidth + 'px';
-    vizCanvas.style.height = '70px';
+    vizCanvas.style.height = vizHeight + 'px';
     vizCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
   sizeViz();
@@ -424,7 +425,7 @@
     analyser.getByteFrequencyData(freqData);
 
     var vw = window.innerWidth;
-    var h = 70;
+    var h = vizHeight;
     vizCtx.clearRect(0, 0, vw, h);
 
     var n = freqData.length;
@@ -440,7 +441,7 @@
       smoothed[i] = sum / count;
     }
 
-    var SENSITIVITY = 2.15; // 1.0 = raw signal, higher = more reactive to quiet audio
+    var SENSITIVITY = 1.7; // 1.0 = raw signal, higher = more reactive to quiet audio
     vizCtx.beginPath();
     vizCtx.moveTo(0, h);
     for (var i = 0; i < n; i++){
