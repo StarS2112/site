@@ -187,6 +187,17 @@
   .sound-toggle.playing .icon-on{ display: none; }
   .sound-toggle.playing .icon-off{ display: block; }
 
+  #viz{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    z-index: 2;
+    pointer-events: none;
+    display: block;
+  }
+
   :focus-visible{ outline: 2px solid var(--primary); outline-offset: 3px; }
 
   @media (max-width: 420px){
@@ -199,7 +210,8 @@
 
 <canvas id="net" aria-hidden="true"></canvas>
 
-<audio id="bgm" src="theme.mp3" loop preload="none"></audio>
+<audio id="bgm" src="theme.mp3" loop preload="auto"></audio>
+<canvas id="viz" aria-hidden="true"></canvas>
 <button class="sound-toggle" id="soundToggle" aria-label="Toggle sound" type="button">
   <svg class="icon-on" viewBox="0 0 24 24" fill="currentColor"><path d="M3 10v4h4l5 5V5L7 10H3Zm13.5 2a4.5 4.5 0 0 0-2.5-4.03v8.06A4.5 4.5 0 0 0 16.5 12ZM14 3.23v2.06c3.39.9 5.5 3.9 5.5 6.71s-2.11 5.81-5.5 6.71v2.06c4.5-.93 7.5-4.7 7.5-8.77s-3-7.84-7.5-8.77Z"/></svg>
   <svg class="icon-off" viewBox="0 0 24 24" fill="currentColor"><path d="M3 10v4h4l5 5V5L7 10H3Zm13.06-1.94-1.41 1.41L16.17 12l-1.52 1.53 1.41 1.41L17.59 13l1.53 1.53 1.41-1.41L19 11.59l1.53-1.53-1.41-1.41L17.59 10.17 16.06 8.66Z"/></svg>
@@ -237,7 +249,7 @@
 
   <div class="specs">
     <div class="head"><span>Rig</span><span>Pearto Rig</span></div>
-    <div class="row"><span class="k">host</span><span class="v">A320M-S2H</span></div>
+    <div class="row"><span class="k">motherboard</span><span class="v">A320M-S2H</span></div>
     <div class="row"><span class="k">cpu</span><span class="v">AMD Ryzen 5 5600</span></div>
     <div class="row"><span class="k">gpu</span><span class="v">AMD Radeon RX 550</span></div>
     <div class="row"><span class="k">ram</span><span class="v">32GB Corsair Vengance DDR4</span></div>
@@ -374,10 +386,90 @@
 
   var bgm = document.getElementById('bgm');
   var toggle = document.getElementById('soundToggle');
-  bgm.volume = 0.50;
+  var FIXED_VOLUME = 0.85;
 
-  toggle.addEventListener('click', function(){
-    if (bgm.paused){
+  // --- visualizer setup (Web Audio API) ---
+  var vizCanvas = document.getElementById('viz');
+  var vizCtx = vizCanvas.getContext('2d');
+  var audioCtx, analyser, freqData, vizReady = false;
+
+  function sizeViz(){
+    vizCanvas.width = window.innerWidth * dpr;
+    vizCanvas.height = 70 * dpr;
+    vizCanvas.style.width = window.innerWidth + 'px';
+    vizCanvas.style.height = '70px';
+    vizCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  sizeViz();
+  window.addEventListener('resize', sizeViz);
+
+  function setupVisualizer(){
+    if (vizReady) return;
+    vizReady = true;
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    var source = audioCtx.createMediaElementSource(bgm);
+    analyser = audioCtx.createAnalyser();
+    analyser.fftSize = 128;
+    freqData = new Uint8Array(analyser.frequencyBinCount);
+    source.connect(analyser);
+    analyser.connect(audioCtx.destination);
+    drawViz();
+  }
+
+  function drawViz(){
+    requestAnimationFrame(drawViz);
+    if (!analyser) return;
+    analyser.getByteFrequencyData(freqData);
+
+    var vw = window.innerWidth;
+    vizCtx.clearRect(0, 0, vw, 70);
+
+    var barCount = freqData.length;
+    var gap = 3;
+    var barWidth = (vw / barCount) - gap;
+    var x = 0;
+
+    for (var i = 0; i < barCount; i++){
+      var value = freqData[i] / 255;
+      var barHeight = Math.max(2, value * 60);
+      var grad = vizCtx.createLinearGradient(0, 70 - barHeight, 0, 70);
+      grad.addColorStop(0, 'rgba(232, 92, 74, 0.85)');
+      grad.addColorStop(1, 'rgba(179, 34, 31, 0.55)');
+      vizCtx.fillStyle = grad;
+      vizCtx.beginPath();
+      vizCtx.roundRect(x, 70 - barHeight, barWidth, barHeight, 2);
+      vizCtx.fill();
+      x += barWidth + gap;
+    }
+  }
+  // --- end visualizer setup ---
+
+  bgm.volume = FIXED_VOLUME;
+  bgm.muted = true;
+  bgm.play().catch(function(){ /* ignored — will start on first interaction below */ });
+
+  function unmuteOnFirstInteraction(){
+    setupVisualizer();
+    bgm.muted = false;
+    if (bgm.paused) bgm.play();
+    toggle.classList.add('playing');
+    window.removeEventListener('pointerdown', unmuteOnFirstInteraction);
+    window.removeEventListener('pointermove', unmuteOnFirstInteraction);
+    window.removeEventListener('touchstart', unmuteOnFirstInteraction);
+    window.removeEventListener('keydown', unmuteOnFirstInteraction);
+    window.removeEventListener('scroll', unmuteOnFirstInteraction);
+  }
+  window.addEventListener('pointerdown', unmuteOnFirstInteraction, { once: true });
+  window.addEventListener('pointermove', unmuteOnFirstInteraction, { once: true });
+  window.addEventListener('touchstart', unmuteOnFirstInteraction, { once: true, passive: true });
+  window.addEventListener('keydown', unmuteOnFirstInteraction, { once: true });
+  window.addEventListener('scroll', unmuteOnFirstInteraction, { once: true, passive: true });
+
+  toggle.addEventListener('click', function(e){
+    e.stopPropagation();
+    setupVisualizer();
+    if (bgm.paused || bgm.muted){
+      bgm.muted = false;
       bgm.play();
       toggle.classList.add('playing');
     } else {
