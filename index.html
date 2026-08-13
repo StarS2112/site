@@ -396,7 +396,7 @@
   var vizHeight = 70;
 
   function sizeViz(){
-    vizHeight = Math.round(window.innerHeight * 0.32); // scales with the window
+    vizHeight = Math.min(120, Math.round(window.innerHeight * 0.12)); // small strip, capped
     vizCanvas.width = window.innerWidth * dpr;
     vizCanvas.height = vizHeight * dpr;
     vizCanvas.style.width = window.innerWidth + 'px';
@@ -442,7 +442,7 @@
       smoothed[i] = sum / count;
     }
 
-    var SENSITIVITY = 1.7; // 1.0 = raw signal, higher = more reactive to quiet audio
+    var SENSITIVITY = 1.0; // 1.0 = raw signal, higher = more reactive to quiet audio
     vizCtx.beginPath();
     vizCtx.moveTo(0, h);
     for (var i = 0; i < n; i++){
